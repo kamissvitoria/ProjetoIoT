@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+
 class RegistroSeeder extends Seeder
 {
     /**
@@ -17,6 +18,7 @@ class RegistroSeeder extends Seeder
     {
         $faker = Faker::create('pt_BR');
         $sensores = Sensor::all();
+        
 
         $unidadesPorTipo = [
             'tempetura' => 'ºC',
@@ -28,21 +30,37 @@ class RegistroSeeder extends Seeder
         $dataAtual = Carbon::now('America/Sao_Paulo')->subMonth();
         $dataFinal = Carbon::now('America/Sao_Paulo');
 
-        while($dataAtual->lessThanOrEqualTo($dataFinal)){
-            foreach($sensores as $sensor){
+        while ($dataAtual->lessThanOrEqualTo($dataFinal)) {
+            foreach ($sensores as $sensor) {
                 $tipo = $sensor->tipo;
 
-                $unidade = $unidadesPorTipo[$tipo]?? '';
+                $unidade = $unidadesPorTipo[$tipo] ?? '';
 
-                switch($tipo){
+                switch ($tipo) {
                     case 'temperatura':
                         $valor = $faker->randomFloat(2, 15, 35);
                         break;
-                        case  'umidade':
+                    case  'umidade':
                         $valor = $faker->randomFloat(2, 20, 90);
                         break;
+                    case  'luminsidade':
+                        $valor = $faker->numberBetween(0, 1000);
+                        break;
+                    case 'presenca':
+                        $valor = $faker->randomElement(['ON', 'OFF']);
+                        break;
+                    default:
+                        $valor = $faker->randomFloat(2, 0, 100);
+                        break;
                 }
+                Registro::create([
+                    'sensor_id' => $sensor->id,
+                    'valor' => $valor,
+                    'unidade' => $unidade,
+                    'data_hora' => $dataAtual->format('Y-m-d H:i:s')
+                ]);
             }
+            $dataAtual->addMinutes(10);
         }
     }
 }
