@@ -12,7 +12,8 @@ class AmbienteCreate extends Component
     public $status;
 
     public function salvar(){
-        $this->validate();
+
+       /* $this->validate();*/
 
         Ambiente::create([
             'nome' => $this->nome,
