@@ -29,8 +29,8 @@
                     <label for="status" class="form-label fw-bold">Status</label>
                     <select id="status" class="form-select rounded-pill px-3" wire:model.defer="status">
                         <option selected>Selecione o status:</option>
-                        <option value='Ativo'>Ativo</option>
-                        <option value='Desativado'>Desativado</option>
+                        <option value='1'>Ativo</option>
+                        <option value='2'>Desativado</option>
                     </select>
                     @error('status')
                         <span class="text-danger small">{{ $message }}</span>
