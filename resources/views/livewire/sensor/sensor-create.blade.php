@@ -2,7 +2,7 @@
     <div class="card bg-primary-subtle shadow-lg rounded-4 p-4" style="width: 100%; max-width: 600px;">
         <h2 class="text-center text-black fw-bold mb-4">Cadastro de Sensores</h2>
 
-        <form wire:submit.prevent="salvar">
+        <form wire:submit.prevent="store">
            
             <div class="mb-3">
                 <label class="form-label text-text fw-semibold">codigo</label>
@@ -36,7 +36,7 @@
             </div>
                      <option selected>Ambiente</option>
                         <select class="form-select" aria-label="Default select example" wire:model.defer='ambiente_id' id="ambiente_id">
-                         <option selected>Ambiente</option>
+                         <option hidden>Ambiente</option>
                         @foreach ($ambientes as $a)
                         <option value="{{$a->id}}">{{$a->nome}}</option>
                         @endforeach

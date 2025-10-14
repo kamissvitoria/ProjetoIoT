@@ -14,7 +14,6 @@
                 </div>
             </div>
 
-            <!-- Filtro e Paginação -->
             <div class="card border-0 shadow-sm rounded-4" style="background-color: #0094f0;">
                 <div class="card-body">
 
@@ -44,9 +43,7 @@
                                         <th>ID</th>
                                         <th>codigo</th>
                                         <th>tipo</th>
-                                        <th>descricao</th>
-                                        <th>status</th>
-                                        <th>Ações</th>
+                                        <th>status</th> <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,20 +52,36 @@
                                             <td>{{ $sensor->id }}</td>
                                             <td>{{ $sensor->codigo }}</td>
                                             <td>{{ $sensor->tipo }}</td>
-                                            <td>{{ $sensor->descricao }}</td>
-                                            <td>{{ $sensor->status }}</td>
+                                            
+                                            {{-- INÍCIO DA MUDANÇA: TOGGLE STATUS --}}
+                                            <td>
+                                                <div class="form-check form-switch d-flex align-items-center justify-content-center">
+                                                    <input class="form-check-input" type="checkbox" role="switch" 
+                                                           id="statusSwitch{{ $sensor->id }}" 
+                                                           wire:model.live="sensorStatus.{{ $sensor->id }}"
+                                                           wire:change="toggleStatus({{ $sensor->id }})"
+                                                           {{ $sensor->status ? 'checked' : '' }}
+                                                           style="width: 3rem; height: 1.5rem; cursor: pointer; background-color: {{ $sensor->status ? '#1494fc' : '#858585' }}; border-color: {{ $sensor->status ? '#1494fc' : '#858585' }};">
+                                                    
+                                                    <label class="form-check-label fw-bold ms-3" for="statusSwitch{{ $sensor->id }}"
+                                                           style="color: {{ $sensor->status ? '#1494fc' : '#555555' }};">
+                                                        {{ $sensor->status ? 'ativo' : 'inativo' }}
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            {{-- FIM DA MUDANÇA: TOGGLE STATUS --}}
 
                                             <td>
                                                 <a href="{{ route('sensor.edit', $sensor->id) }}"
                                                     class="btn btn-sm rounded-pill text-white fw-bold px-3 py-1"
                                                     style="background-color: #3368ee;">Editar</a>
-                                                      <button wire:click="delete({{ $sensor->id }})"
-                                                class="btn btn-sm btn-danger"wire:confirm="Tem certeza que deseja excluir">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
+                                                        <button wire:click="delete({{ $sensor->id }})"
+                                                    class="btn btn-sm btn-danger"wire:confirm="Tem certeza que deseja excluir">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
                                             </td>
 
-                                          
+                                            
                                         </tr>
                                     @empty
                                         <tr>

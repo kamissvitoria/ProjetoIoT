@@ -2,7 +2,7 @@
     <div class="card bg-primary-subtle shadow-lg rounded-4 p-4" style="width: 100%; max-width: 600px;">
         <h2 class="text-center text-black fw-bold mb-4" >Cadastro de Ambiente</h2>
 
-        <form wire:submit.prevent="salvar">
+        <form wire:submit.prevent="store">
             <!-- Nome -->
             <div class="mb-3">
                 <label class="form-label text-text fw-semibold">Nome</label>
