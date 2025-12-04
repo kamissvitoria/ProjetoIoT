@@ -6,12 +6,6 @@
                 <div class="col-md-6 mt-2">
                     <h2 class="fw-bold" style="color: #2c2c2c;">Lista de Registros:</h2>
                 </div>
-                {{-- <div class="col-md-6 text-end mt-2">
-                    <a class="btn text-white rounded-pill shadow" style="background-color: #1494fc;"
-                       /** href="{{ route('registro.creae') }}">**/
-                        <i class="bi bi-plus-circle"></i> <strong>Novo registro</strong>
-                    </a>
-                </div> --}}
             </div>
 
             <!-- Filtro e Paginação -->
