@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sensor_id')->constrained('sensors')->onDelete('cascade');
             $table->string('valor')->nullable(false);
-            $table->string('unidade')->nullable();
+            $table->string('unidade')->nullable(true);
             $table->dateTime('data_hora')->nullable(false);
             $table->timestamps();
         });
